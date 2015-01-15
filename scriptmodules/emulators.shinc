@@ -105,41 +105,17 @@ function em_install_deb_emulators()
 
 	# Tip: launch command:
 	# retroarch --config <config_file> -f -L /usr/lib/libretro/libretro_beetle_wswan.so <ROM_NAME>.extension
-	
-	#####################################################################
-	# Yabause (libretro Sega Saturn core)
-	#####################################################################
-	
-	# Install Yabause
-	echo "Installing Sega Saturn emulator Yabause"
-
-	# Install desmume core
-	# Use libretro* for all packages
-	$cmd_install_pkg retroarch libretro-yabause
-
-	# Tip: launch command:
-	# retroarch --config <config_file> -f -L /usr/lib/libretro/yabause_libretro.so <ROM_NAME>.extension
 
 	#####################################################################
-	# Scummvm (libretro Scummvm core)
+	# Dolphin (Nintendo Gamecube)
 	#####################################################################
 
-        # install from libretro-unstable PPA, remove after install to
-        # avoid other stable packages from updating
-	$cmd_add_repo ppa:libretro/testing
-	
-	# Install scummvm emulator
-	echo "Installing Scummvm emulator"
+	# Installed via Glenric's PPA
+	echo "Installing Nintendo Gamecube emulator Dolphin"
+	# Note: Glenric's PPA uses dolphin-emu-master, not dolphin-emu for Trusty
+	# other wise install dolphin-emu
 
-	# Install desmume core
-	# Use libretro* for all packages
-	$cmd_install_pkg retroarch libretro-scummvm
-	
-	# Remove PPA post install
-	$cmd_remove_repo ppa:libretro/testing
-	
-	# Tip: launch command:
-	# retroarch --config <config_file> -f -L /usr/lib/libretro/desmume_libretro.so <ROM_NAME>.extension
+	$cmd_install_pkg dolphin-emu-master
 
 	#####################################################################
 	# DesMuMe (libretro core)
@@ -158,56 +134,12 @@ function em_install_deb_emulators()
 	# retroarch --config <config_file> -f -L /usr/lib/libretro/desmume_libretro.so <ROM_NAME>.nds 
 
 	#####################################################################
-	# PCSX2 (Playstation 2)
+	# Gens (Genesis/Sega CD/Saturn)
 	#####################################################################
 
-        #install from gregory-hainaut PPA
-	echo "Installing Playstation 2 emulator PCSX2"
-	$cmd_install_pkg pcsx2
-
-	#prerequisites
-	$cmd_install_pkg libportaudio2:i386 libjack-jackd2-0:i386
-  
-	# Link BIOS path from home/RetroRig (source) to .retrorig/
-	ln -sf "$rootdir/BIOS/PCSX2" "$config_home/.config/pcsx2/bios"
-
-	# User might have the idea to manually state a bios file in the terminal.
-	# To save them exporting HOME as /home/user/.retrorig,
-	# a symbolic link is created.
-
-	date=`date`
-	mv "$HOME/.config/pcsx2" "$HOME/.config/pcsx2.backup_retrorig.$date"
-	ln -vs "$config_home/.config/pcsx2/" "$HOME/.config"
-
-	#####################################################################
-	# Dolphin (Nintendo Gamecube)
-	#####################################################################
-
-	# Installed via Glenric's PPA
-	echo "Installing Nintendo Gamecube emulator Dolphin"
-	# Note: Glenric's PPA uses dolphin-emu-master, not dolphin-emu for Trusty
-	# other wise install dolphin-emu
-
-	$cmd_install_pkg dolphin-emu-master
-
-
-	#####################################################################
-	# PPSSPP (PSP)
-	#####################################################################
-
-	echo "Installing Playstation Portable emulator ppsspp"
-
-        #install from RetroRig PPA
-	$cmd_install_pkg ppsspp
-
-	#####################################################################
-	# Stella (Atari 2600)
-	#####################################################################
-
-        # Install from hunter-kaller PPA
-	# Install stella core
-	# Use libretro* for all packages
-	$cmd_install_pkg retroarch libretro-stella
+	# Installed via RetroRig PPA
+	echo "Installing Gens Sega Genesis/CD/32X emulator"
+	$cmd_install_pkg gens
 
 	#####################################################################
 	# Mupen64plus (Sega Saturn)
@@ -243,12 +175,80 @@ function em_install_deb_emulators()
 	$cmd_install_pkg mess
 
 	#####################################################################
-	# Gens (Genesis/Sega CD/Saturn)
+	# PCSX2 (Playstation 2)
 	#####################################################################
 
-	# Installed via RetroRig PPA
-	echo "Installing Gens Sega Genesis/CD/32X emulator"
-	$cmd_install_pkg gens
+        #install from gregory-hainaut PPA
+	echo "Installing Playstation 2 emulator PCSX2"
+	$cmd_install_pkg pcsx2
+
+	#prerequisites
+	$cmd_install_pkg libportaudio2:i386 libjack-jackd2-0:i386
+  
+	# Link BIOS path from home/RetroRig (source) to .retrorig/
+	ln -sf "$rootdir/BIOS/PCSX2" "$config_home/.config/pcsx2/bios"
+
+	# User might have the idea to manually state a bios file in the terminal.
+	# To save them exporting HOME as /home/user/.retrorig,
+	# a symbolic link is created.
+
+	date=`date`
+	mv "$HOME/.config/pcsx2" "$HOME/.config/pcsx2.backup_retrorig.$date"
+	ln -vs "$config_home/.config/pcsx2/" "$HOME/.config"
+
+
+	#####################################################################
+	# PPSSPP (PSP)
+	#####################################################################
+
+	echo "Installing Playstation Portable emulator ppsspp"
+
+        #install from RetroRig PPA
+	$cmd_install_pkg ppsspp
+
+	#####################################################################
+	# Scummvm (libretro Scummvm core)
+	#####################################################################
+
+        # install from libretro-unstable PPA, remove after install to
+        # avoid other stable packages from updating
+	$cmd_add_repo ppa:libretro/testing
+	
+	# Install scummvm emulator
+	echo "Installing Scummvm emulator"
+
+	# Install desmume core
+	# Use libretro* for all packages
+	$cmd_install_pkg retroarch libretro-scummvm
+	
+	# Remove PPA post install
+	$cmd_remove_repo ppa:libretro/testing
+	
+	# Tip: launch command:
+	# retroarch --config <config_file> -f -L /usr/lib/libretro/scummvm_libretro.so <ROM_NAME>.extension
+
+	#####################################################################
+	# Stella (Atari 2600)
+	#####################################################################
+
+        # Install from hunter-kaller PPA
+	# Install stella core
+	# Use libretro* for all packages
+	$cmd_install_pkg retroarch libretro-stella
+
+	#####################################################################
+	# Yabause (libretro Sega Saturn core)
+	#####################################################################
+	
+	# Install Yabause
+	echo "Installing Sega Saturn emulator Yabause"
+
+	# Install desmume core
+	# Use libretro* for all packages
+	$cmd_install_pkg retroarch libretro-yabause
+
+	# Tip: launch command:
+	# retroarch --config <config_file> -f -L /usr/lib/libretro/yabause_libretro.so <ROM_NAME>.extension
 
 }
 
