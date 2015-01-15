@@ -108,7 +108,7 @@ function gp_ps3_blu()
 
 	# RetroArch
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/retroarch/retroarch.cfg" "$config_home/.config/retroarch/"
-	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/retroarch/retroarch-desmume.cfg" "$config_home/.config/retroarch/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/retroarch/desmume_libretro.cfg" "$config_home/.config/retroarch/"
 
 	# Alter Steam config.vdf with proper controls if controller exists
 	STEAM_GP_TYPE="ps3blu"
@@ -626,7 +626,7 @@ function gp_ps3_usb()
 
 	# RetroArch
 	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/retroarch/retroarch.cfg" "$config_home/.config/retroarch/"
-	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/retroarch/retroarch-desmume.cfg" "$config_home/.config/retroarch/"
+	cp -v "$scriptdir/emu-cfgs/ps3_usb_controller/retroarch/desmume_libretro.cfg" "$config_home/.config/retroarch/"
 
 	# Alter Steam config.vdf with proper controls if controller exists
 	STEAM_GP_TYPE="ps3usb"
@@ -638,7 +638,7 @@ function gp_ps3_usb()
 
 	# inject init script and default config for xboxdrv
 	cp -v "$scriptdir/init-scripts/ps3_usb_controller/xboxdrv" "/etc/init.d/"
-	cp -v "$scriptdir/init-scripts/ps3_usb_controller/default/xboxdrv" "/etc/default/xboxdrv"
+	cp -v "$scriptdir/init-scripts/ps3_usb_controller/default/xboxdrv" "/etc/default/"
 	
 	# blacklist xpad
 	cp -v "$scriptdir/init-scripts/ps3_usb_controller/blacklist.conf" "/etc/modprobe.d/"
@@ -868,7 +868,7 @@ function gp_x360_wireless()
 	# default path: /home/$USER/.retrorig/.dolphin-emu/GC/
 	## GC config ##
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/GC/GCPadNew.ini" "$config_home/.dolphin-emu/GC/Config/"
-	cp -v "$scriptdir/emu-cfgs/px360_wireless_controller/Dolphin/GC/Dolphin.ini" "$config_home/.dolphin-emu/GC/Config/"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/GC/Dolphin.ini" "$config_home/.dolphin-emu/GC/Config/"
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/GC/WiimoteNew.ini" "$config_home/.dolphin-emu/GC/Config/"
 	## Wii config ##
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/Dolphin/Wii/GCPadNew.ini" "$config_home/.dolphin-emu/Wii/Config/"
@@ -898,6 +898,10 @@ function gp_x360_wireless()
 	# Gens GS (Sega CD/32X)
 	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/GensGS/gens.cfg" "$config_home/.gens/"
 
+	# RetroArch
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/retroarch/retroarch.cfg" "$config_home/.config/retroarch/"
+	cp -v "$scriptdir/emu-cfgs/x360_wireless_controller/retroarch/desmume_libretro.cfg" "$config_home/.config/retroarch/"
+
 	# Alter Steam config.vdf with proper controls if controller exists
 	STEAM_GP_TYPE="x360wireless"
 	gp_steam_control
@@ -911,6 +915,7 @@ function gp_x360_wireless()
 
 	#inject init script and default config
 	cp -v "$scriptdir/init-scripts/x360_wireless_controller/xboxdrv" "/etc/init.d/"
+	cp -v "$scriptdir/init-scripts/x360_wireless_controller/default/xboxdrv" "/etc/default/"
 
 	##############################################################
 	# Set number of controllers for /etc/default/xboxdrv
@@ -1007,7 +1012,7 @@ RetorRig loads to use the gamepad." 14 62
 	old_post="med_gen_post"
 	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_mednafen_gen_x360_wireless.joystick.xml \&"
 	# The line below is only for good measure
-	new_post="\&\& killall pcsx2 antimicro"
+	new_post="\&\& killall antimicro"
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$es_home/es_systems.cfg"
 	sed -i "s|$old_post|$new_post|g" "$es_home/es_systems.cfg"
@@ -1020,7 +1025,7 @@ RetorRig loads to use the gamepad." 14 62
 	old_post="ps1_post"
 	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_mednafen_ps1_x360_wireless.joystick.xml \&"
 	# The line below is only for good measure
-	new_post="\&\& killall pcsx2 antimicro"
+	new_post="\&\& killall antimicro"
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$es_home/es_systems.cfg"
 	sed -i "s|$old_post|$new_post|g" "$es_home/es_systems.cfg"
@@ -1033,7 +1038,7 @@ RetorRig loads to use the gamepad." 14 62
 	old_post="psp_post"
 	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_ppsspp_x360_wireless.joystick.xml \&"
 	# The line below is only for good measure
-	new_post="\&\& killall pcsx2 antimicro"
+	new_post="\&\& killall antimicro"
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$es_home/es_systems.cfg"
 	sed -i "s|$old_post|$new_post|g" "$es_home/es_systems.cfg"
@@ -1044,9 +1049,9 @@ RetorRig loads to use the gamepad." 14 62
 
 	old_pre="dolphin_pre"
 	old_post="dolphin_post"
-	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_ppsspp_x360_wireless.joystick.xml \&"
+	new_pre="antimicro --hidden --profile $config_home/.config/antimicro/am_dolphin_x360_wireless.joystick.xml \&"
 	# The line below is only for good measure
-	new_post="\&\& killall pcsx2 antimicro"
+	new_post="\&\& killall antimicro"
 	# perform actual changes
 	sed -i "s|$old_pre|$new_pre|g" "$es_home/es_systems.cfg"
 	sed -i "s|$old_post|$new_post|g" "$es_home/es_systems.cfg"
@@ -1182,7 +1187,7 @@ function gp_x360_usb()
 
 	#inject init script and default config
 	cp -v "$scriptdir/init-scripts/x360_usb_controller/xboxdrv" "/etc/init.d/"
-	cp -v "$scriptdir/init-scripts/x360_usb_controller/default/xboxdrv" "/etc/default/xboxdrv"
+	cp -v "$scriptdir/init-scripts/x360_usb_controller/default/xboxdrv" "/etc/default/"
 
 	##############################################################
 	# Set number of controllers for /etc/default/xboxdrv
@@ -1446,7 +1451,7 @@ function gp_generic_usb()
 
 	# RetroArch
 	cp -v "$scriptdir/emu-cfgs/generic_usb_controller/retroarch/retroarch.cfg" "$config_home/.config/retroarch/"
-	cp -v "$scriptdir/emu-cfgs/generic_usb_controller/retroarch/retroarch-desmume.cfg" "$config_home/.config/retroarch/"
+	cp -v "$scriptdir/emu-cfgs/generic_usb_controller/retroarch/desmume_libretro.cfg" "$config_home/.config/retroarch/"
 
 	# copy over default cfgs for ES:
 	cp -v "$scriptdir/es-cfgs/es_systems.cfg" "$es_home"
@@ -1465,7 +1470,7 @@ function gp_generic_usb()
 
 	#inject init script and default config
 	cp -v "$scriptdir/init-scripts/generic_usb_controller/xboxdrv" "/etc/init.d/"
-	cp -v "$scriptdir/init-scripts/generic_usb_controller/default/xboxdrv" "/etc/default/xboxdrv"
+	cp -v "$scriptdir/init-scripts/generic_usb_controller/default/xboxdrv" "/etc/default/"
 
 	##############################################################
 	# Set number of controllers for /etc/default/xboxdrv
@@ -1619,15 +1624,6 @@ RetorRig loads to use the gamepad" 14 62
 	sed -i "s|$old_pre|$new_pre|g" "$es_home/es_systems.cfg"
 	sed -i "s|$old_post|$new_post|g" "$es_home/es_systems.cfg"
 
-	################################
-	# Retroarch/Desmume (DS)
-	################################
-
-	# not needed at this time.
-
-
-/usr/bin/retroarch --config config_temp/retroarch/retroarch-desmume.cfg -f -L /usr/lib/libretro/desmume_libretro.so installdir_temp %ROM%
-
 	# update init scripts for xboxdrv
 	$update_init_xboxdrv
 
@@ -1749,7 +1745,7 @@ function enable_rr_autostart()
 		chmod 755 "$home/.config/autostart/RetroRig-ES.desktop"
 	else
 		# remove any existing entry
-		rm -f "$home.config/autostart/RetroRig-ES.desktop"
+		rm -f "$home/.config/autostart/RetroRig-ES.desktop"
 	fi
 
 	sleep 2
@@ -1920,3 +1916,4 @@ gp_steam_control()
 	esac		
 
 }
+

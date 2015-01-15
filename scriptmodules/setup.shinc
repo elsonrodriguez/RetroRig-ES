@@ -68,30 +68,48 @@ function rrs_prepareFolders()
 	#emulator base directory
 	#pathlist+=("$rootdir/emulators")
 
-	#setup skelton folders for ROMs
-	pathlist+=("$rootdir/ROMs/Atari 2600")
-	pathlist+=("$rootdir/ROMs/Atari Lynx")
-	pathlist+=("$rootdir/ROMs/Gamecube")
-	pathlist+=("$rootdir/ROMs/MAME")
-	pathlist+=("$rootdir/ROMs/mupen64plus")
-	pathlist+=("$rootdir/ROMs/Nintendo DS")
-	pathlist+=("$rootdir/ROMs/NES")
-	pathlist+=("$rootdir/ROMs/SNES")
-	pathlist+=("$rootdir/ROMs/Sega Master System")
-	pathlist+=("$rootdir/ROMs/Sega Game Gear")
-	pathlist+=("$rootdir/ROMs/Sega Genesis")
-	pathlist+=("$rootdir/ROMs/Sega CD")
-	pathlist+=("$rootdir/ROMs/Sega 32X")
-	pathlist+=("$rootdir/ROMs/GB")
-	pathlist+=("$rootdir/ROMs/GBC")
-	pathlist+=("$rootdir/ROMs/GBA")
-	pathlist+=("$rootdir/ROMs/TurboGraphx 16")
-	pathlist+=("$rootdir/ROMs/Neo Geo/CDZ")
-	pathlist+=("$rootdir/ROMs/Neo Geo/AES")
-	pathlist+=("$rootdir/ROMs/PSP")
-	pathlist+=("$rootdir/ROMs/PS1")
-	pathlist+=("$rootdir/ROMs/PS2")
-	pathlist+=("$rootdir/ROMs/Wii")
+	# For RetroRig users using ES flavor, link DIRs to avoid
+	# Having to recopy ROMs
+
+        if [[ -d "$home/RetroRig/ROMs" ]]; then
+                echo "Existing RetroRig ROMs directory found"
+                # Backup old ES ROM directory for safety
+                echo "Backing up old ROM DIR if present"
+                mv -fv  "$rootdir/ROMs" "$rootdir/ROMs.old"
+                # Remove any existing ROM dir from previous install
+                echo "Removing existing ROM dir"
+                rm -fv "$rootdir/ROMs"
+                echo "Linking ROM DIRs"
+                # Link old ROMs folder
+                ln -s "$home/RetroRig/ROMs" "$rootdir/ROMs"
+        else
+                echo "Creating blank folder set"
+                #setup skelton folders for ROMs
+		pathlist+=("$rootdir/ROMs/Atari 2600")
+		pathlist+=("$rootdir/ROMs/Atari Lynx")
+		pathlist+=("$rootdir/ROMs/Gamecube")
+		pathlist+=("$rootdir/ROMs/MAME")
+		pathlist+=("$rootdir/ROMs/mupen64plus")
+		pathlist+=("$rootdir/ROMs/Nintendo DS")
+		pathlist+=("$rootdir/ROMs/NES")
+		pathlist+=("$rootdir/ROMs/SNES")
+		pathlist+=("$rootdir/ROMs/Sega Master System")
+		pathlist+=("$rootdir/ROMs/Sega Game Gear")
+		pathlist+=("$rootdir/ROMs/Sega Genesis")
+		pathlist+=("$rootdir/ROMs/Sega CD")
+		pathlist+=("$rootdir/ROMs/Sega 32X")
+		pathlist+=("$rootdir/ROMs/GB")
+		pathlist+=("$rootdir/ROMs/GBC")
+		pathlist+=("$rootdir/ROMs/GBA")
+		pathlist+=("$rootdir/ROMs/TurboGraphx 16")
+		pathlist+=("$rootdir/ROMs/Neo Geo/CDZ")
+		pathlist+=("$rootdir/ROMs/Neo Geo/AES")
+		pathlist+=("$rootdir/ROMs/PSP")
+		pathlist+=("$rootdir/ROMs/PS1")
+		pathlist+=("$rootdir/ROMs/PS2")
+		pathlist+=("$rootdir/ROMs/Wii")
+	fi
+
 
 	#Artwork 
 	pathlist+=("$rootdir/Artwork/Atari 2600")

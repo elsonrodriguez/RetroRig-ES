@@ -40,7 +40,10 @@ function em_add_debian_repos()
 	#########################
 	# Retroarch / Libretro
 	#########################
-	$cmd_add_repo ppa:hunter-kaller/ppa
+	# Official Libretro team
+	$cmd_add_repo ppa:libretro/stable
+	# Alternative (limited pkgs)
+	# $cmd_add_repo ppa:hunter-kaller/ppa
 
 }
 
@@ -110,19 +113,10 @@ function em_install_deb_emulators()
 	# Stella (Atari 2600)
 	#####################################################################
 
-	# Installed via RetroRig PPA
-	$cmd_install_pkg stella
-
-	# installation of stella from libregeek.org (deprecated)
-	#
-	# As of 20140802, Stella, at least in testing, would fail to launch when using OpenGL
-	# Stella was build from the latest SVN trunk, and works successfully
-	# Source: http://stella.sourceforge.net/development.php
-	# SVN trunk: 'svn co https://svn.code.sf.net/p/stella/code/trunk stella'
-	#
-	# wget --tries=50 -P "/usr/bin/" \
-	# "www.libregeek.org/RetroRig/Ubuntu-Trusty/emulators/Stella/stella"
-	# chmod +x "/usr/bin/stella"
+        # Install from hunter-kaller PPA
+	# Install stella core
+	# Use libretro* for all packages
+	$cmd_install_pkg retroarch libretro-stella
 
 	#####################################################################
 	# Mupen64plus (Sega Saturn)
