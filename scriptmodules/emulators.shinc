@@ -49,6 +49,27 @@ function em_add_debian_repos()
 
 function em_install_deb_emulators()
 {
+
+	#####################################################################
+	# 3DO (libretro 4DO core)
+	#####################################################################
+	
+	# install from libretro-unstable PPA, remove after install to
+        # avoid other stable packages from updating
+	$cmd_add_repo ppa:libretro/testing
+	
+	# Install Yabause
+	echo "Installing 3DO emulator 4DO"
+
+	# Install desmume core
+	# Use libretro* for all packages
+	$cmd_install_pkg retroarch libretro-4do
+	
+	# Remove PPA post install
+	$cmd_remove_repo ppa:libretro/testing
+
+	# Tip: launch command:
+	# retroarch --config <config_file> -f -L /usr/lib/libretro/libretro-4do-wswan.so <ROM_NAME>.extension
 	
 	#####################################################################
 	# Beetle (libretro Bandai Wonderswan core)
