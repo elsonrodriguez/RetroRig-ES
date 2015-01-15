@@ -49,6 +49,28 @@ function em_add_debian_repos()
 
 function em_install_deb_emulators()
 {
+	
+	#####################################################################
+	# Beetle (libretro Bandai Wonderswan core)
+	#####################################################################
+	
+	# install from libretro-unstable PPA, remove after install to
+        # avoid other stable packages from updating
+	$cmd_add_repo ppa:libretro/testing
+	
+	# Install Yabause
+	echo "Installing Bandai Wonderswan emulator Beetle-Wswan"
+
+	# Install desmume core
+	# Use libretro* for all packages
+	$cmd_install_pkg retroarch libretro-beetle-wswan
+	
+	# Remove PPA post install
+	$cmd_remove_repo ppa:libretro/testing
+
+	# Tip: launch command:
+	# retroarch --config <config_file> -f -L /usr/lib/libretro/libretro-beetle-wswan.so <ROM_NAME>.extension
+	
 	#####################################################################
 	# Yabause (libretro Sega Saturn core)
 	#####################################################################
@@ -77,12 +99,12 @@ function em_install_deb_emulators()
 	# Install desmume core
 	# Use libretro* for all packages
 	$cmd_install_pkg retroarch libretro-scummvm
-
-	# Tip: launch command:
-	# retroarch --config <config_file> -f -L /usr/lib/libretro/desmume_libretro.so <ROM_NAME>.extension
 	
 	# Remove PPA post install
 	$cmd_remove_repo ppa:libretro/testing
+	
+	# Tip: launch command:
+	# retroarch --config <config_file> -f -L /usr/lib/libretro/desmume_libretro.so <ROM_NAME>.extension
 
 	#####################################################################
 	# DesMuMe (libretro core)
