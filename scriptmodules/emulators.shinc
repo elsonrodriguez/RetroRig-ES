@@ -49,6 +49,40 @@ function em_add_debian_repos()
 
 function em_install_deb_emulators()
 {
+	#####################################################################
+	# Yabause (libretro Sega Saturn core)
+	#####################################################################
+	
+	# Install Yabause
+	echo "Installing Sega Saturn emulator Yabause"
+
+	# Install desmume core
+	# Use libretro* for all packages
+	$cmd_install_pkg retroarch libretro-yabause
+
+	# Tip: launch command:
+	# retroarch --config <config_file> -f -L /usr/lib/libretro/yabause_libretro.so <ROM_NAME>.extension
+
+	#####################################################################
+	# Scummvm (libretro Scummvm core)
+	#####################################################################
+
+        # install from libretro-unstable PPA, remove after install to
+        # avoid other stable packages from updating
+	$cmd_add_repo ppa:libretro/testing
+	
+	# Install scummvm emulator
+	echo "Installing Scummvm emulator"
+
+	# Install desmume core
+	# Use libretro* for all packages
+	$cmd_install_pkg retroarch libretro-scummvm
+
+	# Tip: launch command:
+	# retroarch --config <config_file> -f -L /usr/lib/libretro/desmume_libretro.so <ROM_NAME>.extension
+	
+	# Remove PPA post install
+	$cmd_remove_repo ppa:libretro/testing
 
 	#####################################################################
 	# DesMuMe (libretro core)
@@ -57,7 +91,7 @@ function em_install_deb_emulators()
         #install from hunter-kaller PPA
 	
 	# Install front-end Retroarch
-	echo "Installing Retroarch"
+	echo "Installing Nintendo DS emulator libretro-desmume "
 
 	# Install desmume core
 	# Use libretro* for all packages
