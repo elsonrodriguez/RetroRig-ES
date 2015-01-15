@@ -72,6 +72,20 @@ function em_install_deb_emulators()
 	# retroarch --config <config_file> -f -L /usr/lib/libretro/libretro-4do-wswan.so <ROM_NAME>.extension
 	
 	#####################################################################
+	# Beetle (libretro beetle-vb core)
+	#####################################################################
+	
+	# Install Beetle for Virtual Boy
+	echo "Installing Virtual Boy emulator Beetle-VB"
+
+	# Install beetle-vb  core
+	# Use libretro* for all packages
+	$cmd_install_pkg retroarch libretro-beetle-vb
+
+	# Tip: launch command:
+	# retroarch --config <config_file> -f -L /usr/lib/libretro/libretro_beetle_vb.so <ROM_NAME>.extension
+	
+	#####################################################################
 	# Beetle (libretro Bandai Wonderswan core)
 	#####################################################################
 	
@@ -90,7 +104,7 @@ function em_install_deb_emulators()
 	$cmd_remove_repo ppa:libretro/testing
 
 	# Tip: launch command:
-	# retroarch --config <config_file> -f -L /usr/lib/libretro/libretro-beetle-wswan.so <ROM_NAME>.extension
+	# retroarch --config <config_file> -f -L /usr/lib/libretro/libretro_beetle_wswan.so <ROM_NAME>.extension
 	
 	#####################################################################
 	# Yabause (libretro Sega Saturn core)
