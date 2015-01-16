@@ -833,6 +833,8 @@ function rrs_software()
 	# inject a space to seperate messages?
 	__postMSGs="$__postMSGs For VirtualBox users, please see the wiki under 'Installation' for notes on running RetroRig under a virtual machine! At the minimum, you will need to add a filter for your controller "
 
+	__postMSGs="$__postMSGs This current configuration requires BIOS files be placed under '$rootdir/BIOS/' folder for the respective system you are using. You may also use the BIOS Loader under the settings menu. Many MAME games under MAME4ALL have self contained BIOS files. Currently, PS1, PS2, Atari Lynx, Sega CD, Neo Geo (AES/CDZ) require BIOS files."
+
 	if [[ ! -z $__postMSGs ]]; then
 		dialog --backtitle "LibreGeek.org - RetroRig-ES Setup. Installation folder: $rootdir" --msgbox "$__postMSGs\n\nSoftware install complete. See debug.log for more details. Continuing on to emulator installs..." 18 60
 	fi
