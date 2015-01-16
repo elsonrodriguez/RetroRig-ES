@@ -109,6 +109,13 @@ function gp_ps3_blu()
 	# RetroArch
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/retroarch/retroarch.cfg" "$config_home/.config/retroarch/"
 	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/retroarch/desmume_libretro.cfg" "$config_home/.config/retroarch/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/retroarch/desmume_libretro.cfg" "$config_home/.config/retroarch/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/retroarch/mednafen_vb_libretro.cfg" "$config_home/.config/retroarch/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/retroarch/mednafen_wswan_libretro.cfg" "$config_home/.config/retroarch/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/retroarch/scummvm_libretro.cfg" "$config_home/.config/retroarch/"
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/retroarch/4do_libretro.cfg" "$config_home/.config/retroarch/"
+	# copy in dummy scummvm launch file
+	cp -v "$scriptdir/emu-cfgs/ps3_blu_controller/retroarch/Launch-ScummVM-Console.retrorig" "$installdir/ROMs/ScummVM"
 
 	# Alter Steam config.vdf with proper controls if controller exists
 	STEAM_GP_TYPE="ps3blu"

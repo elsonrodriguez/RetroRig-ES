@@ -231,21 +231,21 @@ function em_install_deb_emulators()
 	# Stella (Atari 2600)
 	#####################################################################
 
-        # Install from hunter-kaller PPA
-	# Install stella core
-	# Use libretro* for all packages
-	$cmd_install_pkg retroarch libretro-stella
+        # Install from RetroRig PPA
+	# Libretro core does not support save states, use our package.
+	$cmd_install_pkg stella
 
 	#####################################################################
-	# Yabause (libretro Sega Saturn core)
+	# Yabause (libretro Sega Saturn core) 
+	# Disabled for now (very slow!)
 	#####################################################################
 	
 	# Install Yabause
-	echo "Installing Sega Saturn emulator Yabause"
+	#echo "Installing Sega Saturn emulator Yabause"
 
 	# Install desmume core
 	# Use libretro* for all packages
-	$cmd_install_pkg retroarch libretro-yabause
+	#$cmd_install_pkg retroarch libretro-yabause
 
 	# Tip: launch command:
 	# retroarch --config <config_file> -f -L /usr/lib/libretro/yabause_libretro.so <ROM_NAME>.extension
