@@ -1085,7 +1085,7 @@ function h_update_git()
 
 	if [[ ! -d ".git" ]]; then
 		dialog --backtitle "LibreGeek.org - RetroRig Setup." --msgbox "Cannot find direcotry 	'.git'. Please clone the RetroRig setup script via \
-		'git clone https://github.com/ProfessorKaos64/RetroRig'" 20 60
+		'git clone https://github.com/ProfessorKaos64/RetroRig-ES'" 20 60
 		popd
 		return
 	fi
