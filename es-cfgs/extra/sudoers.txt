@@ -2,3 +2,10 @@
 %sudo   ALL=NOPASSWD: /usr/sbin/service xboxdrv restart
 %sudo   ALL=NOPASSWD: /sbin/rmmod hid_sony
 %sudo   ALL=NOPASSWD: /usr/bin/xboxdrv
+
+# Emulation Station shutdown/reboot
+# Reference cpp: Line 43: 
+# https://github.com/Aloshi/EmulationStation/blob/master/es-core/src/platform.cpp#L43
+#
+%sudo   ALL=NOPASSWD: /sbin/shutdown
+

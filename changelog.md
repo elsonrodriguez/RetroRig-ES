@@ -1,5 +1,16 @@
 RetroRig-ES changelog
 ============================
+Version 0.3.5
+
+* Workaround for shutdow/reboot of emulator station
+* Scummvm support (tesing branch libretro-scummvm)
+* Bandai Wonderswan support (stable branch libretro-beetle-wswan)
+* 3DO support (testing branch libretro-4dO)
+* VirtualBoy support (stable branch libretro-beetle-vb)
+* Log file fixes
+* Code cleanup / syntax fixes
+* Package updates for PPA builds
+* Bug fixes
 
 Version 0.2.5
 
