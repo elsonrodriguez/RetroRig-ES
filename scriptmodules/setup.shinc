@@ -213,6 +213,7 @@ function rrs_prepareFolders()
 	pathlist+=("$rootdir/BIOS/Sega CD")
 	pathlist+=("$rootdir/BIOS/Sega Saturn")
 	pathlist+=("$rootdir/BIOS/MAME")
+	pathlist+=("$rootdir/BIOS/3DO")
 
 	# folder for savestates 
 	# Moved if statements below to backup folders

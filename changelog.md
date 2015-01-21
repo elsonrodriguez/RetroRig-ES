@@ -11,6 +11,7 @@ Version 0.3.5
 * Code cleanup / syntax fixes
 * Package updates for PPA builds
 * Bug fixes
+* Utopic support
 
 Version 0.2.5
 
