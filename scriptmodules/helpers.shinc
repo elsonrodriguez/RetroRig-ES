@@ -48,7 +48,11 @@ h_clean_gamepad()
 
 	# Retroarch
 	rm -rf "$config_home/.config/retroarch/retroarch.cfg"
-	rm -rf "$config_home/.config/retroarch/retroarch-desmume.cfg"
+	rm -rf "$config_home/.config/retroarch/retroarch_libretro.cfg"
+	rm -rf "$config_home/.config/retroarch/4do_libretro.cfg"
+	rm -rf "$config_home/.config/retroarch/mednafen_wswan_libretro.cfg"
+	rm -rf "$config_home/.config/retroarch/mednafen_vb_libretro.cfg"
+	rm -rf "$config_home/.config/retroarch/scummvm_libretro.cfg"
 	
 	# remove the /usr/share/applications/gp_autodetect_xbmc.sh file, so we can actively
 	# set the gamepad type on changes from user input in the script gamepad select
