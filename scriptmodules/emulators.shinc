@@ -211,16 +211,16 @@ function em_install_deb_emulators()
 	# testing PPA team
 	echo "Installing Scummvm emulator"
 
-	if [ "$os_arch" == "x64" ]; then
-		wget --tries=50 -P "/tmp" "http://www.libregeek.org/RetroRig/Ubuntu-Trusty/emulators/scummvm/libretro-scummvm_1.7.0.git+r19~ubuntu14.04.1_i386.deb"
-		$cmd_manual_pkg_install "/tmp/libretro-scummvm_1.7.0.git+r19~ubuntu14.04.1_i386.deb"
-		rm -f "/tmp/libretro-scummvm_1.7.0.git+r19~ubuntu14.04.1_i386.deb"
-	elif [ "$os_arch" == "x86" ]; then
-		wget --tries=50 -P "/tmp" "http://www.libregeek.org/RetroRig/Ubuntu-Trusty/emulators/scummvm/libretro-scummvm_1.7.0.git+r19~ubuntu14.04.1_i386.deb"
-		$cmd_manual_pkg_install "/tmp/libretro-4do_1.3.2.3+r53~4~ubuntu14.04.1_i386.deb"
-		rm -f "/tmp/libretro-scummvm_1.7.0.git+r19~ubuntu14.04.1_i386.deb"
-	fi
+	# add testing ppa only temporarily to add scummvm
+	$cmd_add_repo ppa:libretro/testing
+	$cmd_update_system
 
+	# Install ScummVM
+	$cmd_install_pkg libretro-scummvm
+
+	# Remove ppa and upate	
+	$cmd_remove_repo ppa:libretro/testing
+	$cmd_update_system
 
 	#####################################################################
 	# Stella (Atari 2600)
