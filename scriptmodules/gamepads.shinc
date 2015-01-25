@@ -1694,8 +1694,8 @@ function enable_gp_autostart()
 
 	clear
 
-	PS3_USB=$(grep -m 1 -Ee "autostartES_PS3_USB" "/usr/share/applications/gp_autodetect.sh")
-	PS3_BT=$(grep -m 1 -Ee "autostartES_PS3_BT" "/usr/share/applications/gp_autodetect.sh")
+	PS3_USB=$(grep -m 1 -Ee "autostartES_GP_USB" "/usr/share/applications/gp_autodetect.sh")
+	PS3_BT=$(grep -m 1 -Ee "autostartES_GP_BT" "/usr/share/applications/gp_autodetect.sh")
 	
 	#default gamepad autostart is disabled
 	gp_autostart=disabled
