@@ -1022,7 +1022,7 @@ function rrs_post_install()
 	# $XDG_CURRENT_DESKTOP will tell you what DE you are using.
 	# This sometimes is off, using a nice utility from alexeevdv
 	# Code: https://github.com/alexeevdv/dename
-	desktop=$(/bin/bash $scriptdir/scripts/dename/dename.sh -n)
+	desktop=$(/bin/bash $scriptdir/scripts/dename.sh -n)
 
 	#rrDE=$XDG_CURRENT_DESKTOP
 
