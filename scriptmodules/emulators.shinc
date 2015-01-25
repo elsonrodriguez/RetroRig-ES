@@ -57,11 +57,10 @@ function em_install_deb_emulators()
 	# install from libretro-unstable PPA
 	# Packages were verified working enough for use.
 
-	# Install desmume core
-	# Use libretro* for all packages
-	# add testing ppa only temporarily to add 4do. 
-	# !!! This will be removed later on in the 
-
+	
+	# add testing ppa only temporarily to add:
+	# 4do, ScummVM
+	
 	# Add repository for testing/unstable cores
 	$cmd_add_repo ppa:libretro/testing
 	$cmd_update_system

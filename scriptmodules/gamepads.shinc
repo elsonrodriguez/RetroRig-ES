@@ -1722,6 +1722,7 @@ function enable_gp_autostart()
 		;;
 	esac
 	
+	clear
 	if [ "$gp_autostart" == "enabled" ]; then
 		sed -i "s|$PS3_USB|autostartES_PS3_USB=enabled|g" "/usr/share/applications/gp_autodetect.sh"
 		sed -i "s|$PS3_BT|autostartES_PS3_BT=enabled|g" "/usr/share/applications/gp_autodetect.sh"
@@ -1730,7 +1731,6 @@ function enable_gp_autostart()
 		sed -i "s|$PS3_BT|autostartES_PS3_BT=disabled|g" "/usr/share/applications/gp_autodetect.sh"
 	fi
 	
-	clear
 	$cmd_rescan_restart
 	sleep 2
 }
