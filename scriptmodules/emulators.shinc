@@ -51,29 +51,34 @@ function em_install_deb_emulators()
 {
 
 	#####################################################################
-	# 3DO (libretro 4DO core)
+	# Retroarch Unstable / Testing Cores
 	#####################################################################
 	
-	# install from libretro-unstable PPA, downloaded as manual pkg
-        # from libreegeek.org until it makes it into the libretro/stable
-	# branch
-	
-	# Install 4DO (32 bit only available at the moment)
-	echo "Installing 3DO emulator 4DO"
+	# install from libretro-unstable PPA
+	# Packages were verified working enough for use.
 
 	# Install desmume core
 	# Use libretro* for all packages
+	# add testing ppa only temporarily to add 4do. 
+	# !!! This will be removed later on in the 
 
-	if [ "$os_arch" == "x64" ]; then
-		wget --tries=50 -P "/tmp" "http://www.libregeek.org/RetroRig/Ubuntu-Trusty/emulators/3do/libretro-4do_1.3.2.3+r53~4~ubuntu14.04.1_amd64.deb"
-		$cmd_manual_pkg_install "/tmp/libretro-4do_1.3.2.3+r53~4~ubuntu14.04.1_amd64.deb"
-		rm -f "/tmp/libretro-4do_1.3.2.3+r53~4~ubuntu14.04.1_amd64.deb"
-	elif [ "$os_arch" == "x86" ]; then
-		wget --tries=50 -P "/tmp" "http://www.libregeek.org/RetroRig/Ubuntu-Trusty/emulators/3do/libretro-4do_1.3.2.3+r53~4~ubuntu14.04.1_i386.deb"
-		$cmd_manual_pkg_install "/tmp/libretro-4do_1.3.2.3+r53~4~ubuntu14.04.1_i386.deb"
-		rm -f "/tmp/libretro-4do_1.3.2.3+r53~4~ubuntu14.04.1_i386.deb"
-	fi
+	# Add repository for testing/unstable cores
+	$cmd_add_repo ppa:libretro/testing
+	$cmd_update_system
 
+	# Install 4DO (32 bit only available at the moment)
+	echo "Installing 3DO emulator 4DO (testing)"
+	$cmd_install_pkg libretro-4do
+
+	# Install scummvm emulator
+	# At the moment, only 32-bit is compiled sucessfully by 
+	# the libretro testing PPA team
+	echo "Installing Scummvm emulator"
+	$cmd_install_pkg libretro-scummvm
+
+	# Remove ppa and upate	
+	$cmd_remove_repo ppa:libretro/testing
+	$cmd_update_system
 	
 	#####################################################################
 	# Beetle (libretro beetle-vb core)
@@ -197,30 +202,6 @@ function em_install_deb_emulators()
 
         #install from RetroRig PPA
 	$cmd_install_pkg ppsspp
-
-	#####################################################################
-	# Scummvm (libretro Scummvm core)
-	#####################################################################
-
-	# install from libretro-unstable PPA, downloaded as manual pkg
-        # from libreegeek.org until it makes it into the libretro/stable
-	# branch
-	
-	# Install scummvm emulator
-	# At the moment, only 32-bit is compiled sucessfully by the libretro
-	# testing PPA team
-	echo "Installing Scummvm emulator"
-
-	# add testing ppa only temporarily to add scummvm
-	$cmd_add_repo ppa:libretro/testing
-	$cmd_update_system
-
-	# Install ScummVM
-	$cmd_install_pkg libretro-scummvm
-
-	# Remove ppa and upate	
-	$cmd_remove_repo ppa:libretro/testing
-	$cmd_update_system
 
 	#####################################################################
 	# Stella (Atari 2600)
