@@ -1028,11 +1028,15 @@ function rrs_post_install()
 	# power functions, shortcuts and more.
 
 	# $XDG_CURRENT_DESKTOP will tell you what DE you are using.
+	# This sometimes is off, using a nice utility from alexeevdv
+	# Code: https://github.com/alexeevdv/dename
+	desktop=$(/bin/bash $scriptdir/scripts/dename/dename.sh -n)
+
 	#rrDE=$XDG_CURRENT_DESKTOP
 
-	# Using temp OS var ......
-	case $OS_TYPE in
-		Ubuntu)
+	# set extra shortcuts and tweaks
+	case $desktop in
+		UNITY)
 
 			# Disable screensaver, EmulationStation will manage this
 			# Export display to allow gsettings running in terminal window
@@ -1043,14 +1047,14 @@ function rrs_post_install()
 
 			# Create Unity launcher icon from existing /usr/share/applications/RetroRig-ES.desktop
 			# This only applies to Unity desktop users.
-			gsettings set com.canonical.Unity.Launcher favorites "$(gsettings get com.canonical.Unity.Launcher favorites | sed "s/, *'RetroRig-ES.desktop' *//g" | sed "s/'RetroRig-ES.desktop' *, *//g" | sed -e "s/]$/, 'RetroRig-ES.desktop'")"
+			gsettings set com.canonical.Unity.Launcher favorites "$(gsettings get com.canonical.Unity.Launcher favorites | sed "s/, *'RetroRig-ES.desktop' *//g" | sed "s/'RetroRig-ES.desktop' *, *//g" | sed -e "s/]$/, 'RetroRig-ES.desktop']/")"
 			;;
 
-		Mint)
+		CINNAMON)
 			# Nothing to see here yet
 			;;
 
-		Deepin)
+		GNOME)
 			# Nothing to see here yet
 			;;			
 
