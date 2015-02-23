@@ -751,14 +751,16 @@ function h_bios_checker()
 	echo "MESS romset"	
 	echo "######################################"
 	# MESS -g BIOS files
-	h_filechecker "$rootdir/ROMs/BIOS/MESS" 
+	h_filechecker "$rootdir/BIOS/MESS" 
+	h_filechecker "$rootdir/BIOS/Neo Geo CDZ"
+	h_filechecker "$rootdir/BIOS/Neo Geo AES"
 	# output something to user, so they don't necessarily have to check the debug log
 	echo "MESS BIOS directory contains: "
 	ls "$rootdir/BIOS/MESS"
 	echo ""
 	# If MESS is loaded already, verify BIOS files
 	/usr/games/mess neocdz -verifyroms
-
+	/usr/games/mess aes -verifyroms
 
 	echo "######################################"
 	echo "MAME romset"	
@@ -787,13 +789,14 @@ loader_type="BIOS"
 while true; do
 cmd=(dialog --backtitle "LibreGeek.org RetroRig Installer" --menu "Load BIOS files for which system?" 19 32 24)
 options=(1 "Atari Lynx"
-	 2 "Neo-Geo AES/CDZ"
-	 3 "MAME" 
-	 4 "PSX/PS1"
-	 5 "PS2"
-	 6 "Sega CD"    
-	 7 "Sega Satrun"
-	 8 "Exit BIOS Loader")
+	 2 "Neo-Geo AES"
+	 3 "Neo-Geo CDZ"
+	 4 "MAME" 
+	 5 "PSX/PS1"
+	 6 "PS2"
+	 7 "Sega CD"    
+	 8 "Sega Satrun"
+	 9 "Exit BIOS Loader")
 
 	#make menu choice
 	selection=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -815,9 +818,18 @@ options=(1 "Atari Lynx"
 		2)
 		# call file loader  	
 		h_file_loader
-		# copy Neo-Geo BIOS file over to MESS (root emulator)
+		# copy Neo-Geo AES BIOS file over to MESS (root emulator)
 		if [ -n "$folder" ]; then
 			cp -v "$folder" "$rootdir/BIOS/Neo Geo AES/"
+		fi
+		;;
+		
+				2)
+		# call file loader  	
+		h_file_loader
+		# copy Neo-Geo CDZ BIOS file over to MESS (root emulator)
+		if [ -n "$folder" ]; then
+			cp -v "$folder" "$rootdir/BIOS/Neo Geo CDZ/"
 		fi
 		;;
 
