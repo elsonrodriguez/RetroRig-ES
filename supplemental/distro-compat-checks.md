@@ -15,10 +15,10 @@
       * libretro-desmume, OK, 32/64-bit
 * libretro (testing): Multi, see below
       * libretro-scummvm, OK, 32/64-bit
-* gens, **NO**, needs built / imported
+* gens, OK, built, **needs tested**
 * mupen64plus, OK, 32-bit (core pkg),32/64-bit (all else), imported
-* mame, **NO**, needs built / imported
-* mess, **NO**, needs built / imported
+* mame, OK, imported, 32/64-bit
+* mess, **Needs tested**, needs built / imported
 * mednafen, OK, 32/64-bit
 * ppsspp, OK, 32/64-bit
 * stella, OK, 32/64-bit
@@ -28,9 +28,9 @@
 * getpos, OK, 32/64-bit
 * joydetect, OK, 32/64-bit
 * libsdl2-i386, **NO**, needs built / imported
-* polarssl, **NO**, needs built / imported
+* polarssl, OK, part of official repository
 * qtsixa, OK, 32/64-bit
-* shairplay, **NO**, needs built / imported
+* shairplay, N/A (remnant of XBMX RetroRig?)
 * retrorig-setup, **NO**, needs built / imported
 
 ----------------------------------------------------
