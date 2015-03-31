@@ -3,6 +3,7 @@
 ----------------------------------------------------
 
 **Requires multi-arch?**: yes
+**All Packages Tested?**: no
 
 ### Emulators
 * pcsx2: OK, 32-bit
@@ -15,7 +16,7 @@
 * libretro (testing): Multi, see below
       * libretro-scummvm, OK, 32/64-bit
 * gens, **NO**, needs built / imported
-* mupen64plus, **NO**, needs built / imported
+* mupen64plus, **YES**, imported
 * mame, **NO**, needs built / imported
 * mess, **NO**, needs built / imported
 * mednafen, OK, 32/64-bit
