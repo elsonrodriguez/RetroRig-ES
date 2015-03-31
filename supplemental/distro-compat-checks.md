@@ -9,12 +9,12 @@
 * pcsx2: OK, 32-bit
 * dolphin-emu-master: OK, 64-bit
 * libretro (stable): Multi, see below
-      * libretro-4do, OK, 32/64-bit
       * libretro-beetle-vb, OK, 32/64-bit
       * libretro-beetle-wsan, OK, 32/64-bit
       * libretro-desmume, OK, 32/64-bit
 * libretro (testing): Multi, see below
       * libretro-scummvm, OK, 32/64-bit
+      * libretro-4do, OK, 32/64-bit
 * gens, OK, built, **needs tested**
 * mupen64plus, OK, 32-bit (core pkg),32/64-bit (all else), imported
 * mame, OK, imported, 32/64-bit
