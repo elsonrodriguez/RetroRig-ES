@@ -16,7 +16,7 @@
 * libretro (testing): Multi, see below
       * libretro-scummvm, OK, 32/64-bit
 * gens, **NO**, needs built / imported
-* mupen64plus, **YES**, 32-bit (core pkg),32/64-bit (all else), imported
+* mupen64plus, OK, 32-bit (core pkg),32/64-bit (all else), imported
 * mame, **NO**, needs built / imported
 * mess, **NO**, needs built / imported
 * mednafen, OK, 32/64-bit
