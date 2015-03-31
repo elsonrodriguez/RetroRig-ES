@@ -2,7 +2,7 @@
 ## Ubuntu 14.10 compatibility (Utopic) checks:
 ----------------------------------------------------
 
-**Requires multi-arch?**: yes
+**Requires multi-arch?**: yes  
 **All Packages Tested?**: no
 
 ### Emulators
