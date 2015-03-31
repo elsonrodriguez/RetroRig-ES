@@ -34,7 +34,7 @@
 * retrorig-setup, **NO**, needs built / imported
 
 ----------------------------------------------------
-## Ubuntu 15.04 compatibility (Utopic) checks:
+## Ubuntu 15.04 compatibility (Vivid) checks:
 ----------------------------------------------------
 
 * TODO
