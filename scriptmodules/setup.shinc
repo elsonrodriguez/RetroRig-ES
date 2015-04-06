@@ -689,7 +689,8 @@ function rrs_add_standard_repos()
 				*)
 					;;
 			esac
-			
+		;;
+		
 		"SteamOS")
 			#find version of operating system
 			###############################################################
@@ -727,7 +728,6 @@ function rrs_add_standard_repos()
 					;;
 			esac
 		;;
-
 		LinuxMint)
 
 			###############################################################
