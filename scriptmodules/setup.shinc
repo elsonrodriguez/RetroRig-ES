@@ -867,8 +867,8 @@ function rrs_software()
 					deb_install_core_pkgs
 					rrs_sysv_openrc_init
 					deb_debug_routine
-					;;
-
+				;;
+		;;
 		SteamOS)
 			case $OS_RELEASE in
 				"2014")
