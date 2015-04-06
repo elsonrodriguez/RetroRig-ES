@@ -863,6 +863,7 @@ function rrs_software()
 					rrs_sysv_openrc_init
 					deb_debug_routine
 				;;
+			esac
 		;;
 		
 		SteamOS)
