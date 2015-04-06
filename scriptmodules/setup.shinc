@@ -559,7 +559,6 @@ function rrs_source_syscalls()
 					exit_unsupported="yes"
 					;;
 			esac
-
 			;;
 
 		Deepin)
@@ -584,7 +583,6 @@ function rrs_source_syscalls()
 					exit_unsupported="yes"
 					;;
 			esac
-
 			;;
 		
 		SteamOS)
@@ -610,7 +608,6 @@ function rrs_source_syscalls()
 					exit_unsupported="yes"
 					;;
 			esac
-
 			;;
 
 		*)
@@ -683,7 +680,6 @@ function rrs_add_standard_repos()
 
 					# no repos for now unless needed. EmulationStation may handle X window position much better
 					# than XBMC
-
 					;;
 
 				*)
@@ -721,7 +717,6 @@ function rrs_add_standard_repos()
 					echo "Running Unknown Release"
 					# no repos for now unless needed. EmulationStation may handle X window position much better
 					# than XBMC
-
 					;;
 
 				*)
@@ -748,7 +743,6 @@ function rrs_add_standard_repos()
 			case $OS_RELEASE in
 				"17")
 					echo "running Linux Mint 17 Qiana"
-					
 						# latest X11 drivers
 						$cmd_add_repo ppa:xorg-edgers/ppa
 					;;
@@ -856,6 +850,7 @@ function rrs_software()
 					;;
 			esac
 		;;
+	
 		Deepin)
 
 			case $OS_RELEASE in
@@ -869,6 +864,7 @@ function rrs_software()
 					deb_debug_routine
 				;;
 		;;
+		
 		SteamOS)
 			case $OS_RELEASE in
 				"2014")
@@ -884,9 +880,6 @@ function rrs_software()
 					;;
 			esac
 		;;
-
-		*)
-			;;
 	esac
 
 
