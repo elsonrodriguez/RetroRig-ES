@@ -586,6 +586,32 @@ function rrs_source_syscalls()
 			esac
 
 			;;
+		
+		SteamOS)
+
+			case $OS_RELEASE in
+
+				1.0)
+					source "$scriptdir/scriptmodules/syscalls-debian.shinc"
+					platform_check="Beta"
+					pkg_manager="apt/aptitude"
+					init_system="upstart"
+					exit_unsupported="no"
+					;;
+
+
+				*)
+
+					# This does not exit the script at this time, but will once 
+					# All proper support distros that work are identifed.
+					platform_check="No"
+					pkg_manager="N/A"
+					init_system="N/A"
+					exit_unsupported="yes"
+					;;
+			esac
+
+			;;
 
 		*)
 			# This does not exit the script at this time, but will once 
@@ -628,8 +654,6 @@ function rrs_add_standard_repos()
 	case $OS_TYPE in
 		"Ubuntu")
 			#find version of operating system
-
-
 			###############################################################
 			# Add our standport Debian repositories for various pkgs
 			###############################################################
@@ -657,6 +681,43 @@ function rrs_add_standard_repos()
 
 					echo "running Ubuntu 14.10"
 
+					# no repos for now unless needed. EmulationStation may handle X window position much better
+					# than XBMC
+
+					;;
+
+				*)
+					;;
+			esac
+			
+		"SteamOS")
+			#find version of operating system
+			###############################################################
+			# Add our standport Debian repositories for various pkgs
+			###############################################################
+			# add respository for RetroRig backends (dolphin, mednafen,...)
+			# Using standard packages for now from system repos unless needed...
+			# $cmd_add_repo ppa:beauman/retrorig
+
+			# Add repository for additional pkgs (retrorig-setup, joydetect)
+			$cmd_add_repo ppa:mdeguzis/retrorig-es
+			# Add repository for qtsixa 
+			$cmd_add_repo ppa:falk-t-j/qtsixa
+			# emulation station team PPA
+			$cmd_add_repo ppa:emulationstation/ppa
+			# add emulator repostories
+			em_add_debian_repos
+
+			case $OS_RELEASE in
+
+				1.0)
+
+					echo "SteamOS Alchemist 1.0"
+					;;
+
+				14.10)
+
+					echo "Running Unknown Release"
 					# no repos for now unless needed. EmulationStation may handle X window position much better
 					# than XBMC
 
@@ -808,6 +869,17 @@ function rrs_software()
 					deb_debug_routine
 					;;
 
+		SteamOS)
+			case $OS_RELEASE in
+				"2014")
+					# source install module
+					source "$scriptdir/scriptmodules/debian-install.shinc"
+					# Commence software install routine
+					echo "Debian based install detected...installing packages"
+					deb_install_core_pkgs
+					rrs_sysv_openrc_init
+					deb_debug_routine
+					;;
 				*)
 					;;
 			esac
