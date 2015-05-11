@@ -1,7 +1,8 @@
 ----------------------------------------------------
-## Ubuntu 14.10 compatibility (Utopic) checks:
+## Ubuntu 15.04 compatibility (Vivid Vervet) checks:
 ----------------------------------------------------
 
+**Needs redone fro 15.04 (previously 14.10)**  
 **Requires multi-arch?**: yes  
 **All Packages Tested?**: no
 
