@@ -32,7 +32,7 @@ function em_add_debian_repos()
 	# PPSSPP
 	#########################
 	# The ppsspp/stable PPA is 20 wks old as of 20150104
-	# $cmd_add_repo ppa:ppsspp/stable
+	$cmd_add_repo ppa:ppsspp/stable
 
 	# Use retorigs PPA version, maintained by us (contains SDL2)
 	# This will need maintained with our build script in /supplemental
