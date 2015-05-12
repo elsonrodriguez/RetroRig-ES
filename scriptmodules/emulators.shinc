@@ -191,13 +191,16 @@ function em_install_deb_emulators()
 	# the libretro testing PPA team. 
 	# Imported to RetroRig-ES PPA 20150512'
 	
-	# Install scummvm emulator from the RetroRig-PPA
 	echo "Installing Scummvm emulator"
+	
+	# Install scummvm emulator from the RetroRig-PPA
 	$cmd_install_pkg $PKG_scummvm
 
 	#####################################################################
 	# 3DO (libretro 4DO core)
 	#####################################################################
+	
+	echo "Installing 3DO emulator 4DO"
 	
 	# install from libretro-stable PPA
 	$cmd_install_pkg $PKG_4DO
@@ -205,9 +208,10 @@ function em_install_deb_emulators()
 	#####################################################################
 	# Retroarch (used for libretro cores)
 	#####################################################################
-	
-	# Install Retroarch
+
 	echo "Installing emulator front-end Retroarch"
+	
+	# Install via libretro stable
 	$cmd_install_pkg $PKG_retroarch
 	
 	#####################################################################
@@ -217,82 +221,85 @@ function em_install_deb_emulators()
 	# Install Beetle for Virtual Boy
 	echo "Installing Virtual Boy emulator Beetle-VB"
 
-	# Install beetle-vb  core
+	# Install via libretro stable
 	$cmd_install_pkg $PKG_virtualboy
 
 	#####################################################################
 	# Beetle (libretro Bandai Wonderswan core)
 	#####################################################################
 	
-	# install from libretro-stable PPA
 	echo "Installing Bandai Wonderswan emulator Beetle-Wswan"
 	
-	# Install Wonderswan emulator
+	# Install from libretro-stable PPA
 	$cmd_pkg_install $PKG_libretro-beetle-wswan
 
 	#####################################################################
 	# Dolphin (Nintendo Gamecube)
 	#####################################################################
 
-	# Installed via Glenric's PPA
 	echo "Installing Nintendo Gamecube emulator Dolphin"
 	# Note: Glenric's PPA uses dolphin-emu-master, not dolphin-emu for
 	# Trusty/Vivid. Otherwise install dolphin-emu
 
-	# Install Dolphin emulator
+	# Install via Glenric's PPA
 	$cmd_install_pkg $PKG_dolphin
 
 	#####################################################################
 	# DesMuMe (libretro core)
 	#####################################################################
 
-        #install from hunter-kaller PPA
-	
 	# Install front-end Retroarch
 	echo "Installing Nintendo DS emulator libretro-desmume "
 
 	# Install desmume core
 	# Use libretro* for all packages
+	
+	# Install from hunter-kaller PPA
 	$cmd_install_pkg $PKG_desmume
 
 	#####################################################################
 	# Gens (Genesis/Sega CD/Saturn)
 	#####################################################################
 
-	# Installed via RetroRig PPA
 	echo "Installing Gens Sega Genesis/CD/32X emulator"
+	
+	# Install via RetroRig PPA
 	$cmd_install_pkg $PKG_gens
 
 	#####################################################################
 	# Mupen64plus (Sega Saturn)
 	#####################################################################
 	
-	# Installed via RetroRig PPA. Vivid pkg is still old.
 	echo "Installing mupen64plus emulator"
+	
+	# Installed via RetroRig PPA. Core repo pkg is still old.
 	$cmd_install_pkg $PKG_mupen64plus
 
 	#####################################################################
 	# MAME (multi-system)
 	#####################################################################
 
-	# Installed via core repos (kept up to date as of 20150512)
 	echo "Installing MAME emulator"
+	
+	# Install via core repos (kept up to date as of 20150512)
 	$cmd_install_pkg $PKG_mame
 
 	#####################################################################
 	# Mednafen (multi-system)
 	#####################################################################
 
-	# Installed via core repos
 	echo "Installing Mednafen emulator"
+	
+	# Install via core repos
 	$cmd_install_pkg $PKG_mednafen
 
 	#####################################################################
 	# MESS (multi-system)
 	#####################################################################
 
-	# Installed via core repos (kept up to date as of 20150107)
 	echo "Installing MESS emulator"
+	
+	# Installed via core repos (kept up to date as of 20150107)
 	$cmd_install_pkg $PKG_mess
 
 	#####################################################################
@@ -330,10 +337,11 @@ function em_install_deb_emulators()
 	# Stella (Atari 2600)
 	#####################################################################
 
-        # Install from RetroRig PPA
 	# Libretro core does not support save states, use our package.
 	# Needs built for Vivid. Binary copied, but needs tesed. If that fails,
 	# source package will need rebuilt to Vivid release in RetroRig PPA.
+	
+	# Install from RetroRig PPA
 	$cmd_install_pkg $PKG_stella
 
 	#####################################################################
@@ -352,11 +360,8 @@ function em_install_deb_emulators()
 	# Higan (Accurate Nintendo multi-system emulator)
 	#####################################################################
 	
-	# Install Higan
 	echo "Installing Nintendo multi-system emulator Higan"
 
-	# Install Higan
-	# Package source: Vivid
-
+	# Install from Ubuntu offficial repos (available since Trusty)
 	$cmd_install_pkg $PKG_higan
 }
