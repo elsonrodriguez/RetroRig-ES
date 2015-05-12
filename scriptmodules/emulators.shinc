@@ -186,14 +186,12 @@ function em_install_deb_emulators()
 	#####################################################################
 	# Retroarch Unstable / Testing Cores
 	#####################################################################
-	
-	# install from libretro-stable PPA
-	# Packages were verified working enough for use.
 
-	# Install scummvm emulator from the RetroRig-PPA
 	# At the moment, only 32-bit is compiled sucessfully by 
-	# the libretro testing PPA team. PKG was copied to the 
-	# RetroRig-ES PPA
+	# the libretro testing PPA team. 
+	# Imported to RetroRig-ES PPA 20150512'
+	
+	# Install scummvm emulator from the RetroRig-PPA
 	echo "Installing Scummvm emulator"
 	$cmd_install_pkg $PKG_scummvm
 
