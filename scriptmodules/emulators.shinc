@@ -12,72 +12,204 @@ function em_add_debian_repos()
 	# Note: system update for repos occurs in rrs_software
 	# The ppa:mdeguzis/retrorig PPA is added in rrs_add_standard_repos
 	# We want to maintain as little as possible to decrease overhead
+	
 
-	#########################
-	# PCSX2
-	#########################
-	# PPA check: as of 20150104, PPA is fairly up to date
-	# Builds seem to be within a 2 week timeframe
-	$cmd_add_repo ppa:gregory-hainaut/pcsx2.official.ppa
+case $OS_TYPE in
+		"Ubuntu")
 
-	#########################
-	# Dolphin
-	#########################
-	# PPA check: as of 20150104, PPA is kept very up to date
-	# Builds seem to be within the week of master git branch
-	# Use glenric's PPA due to this project moving so fast
-	$cmd_add_repo ppa:glennric/dolphin-emu
+			case $OS_RELEASE in
 
-	#########################
-	# PPSSPP
-	#########################
-	# The ppsspp/stable PPA is 20 wks old as of 20150104
-	$cmd_add_repo ppa:ppsspp/stable
+				14.04)
+					$cmd_add_repo ppa:gregory-hainaut/pcsx2.official.ppa
+					$cmd_add_repo ppa:glennric/dolphin-emu
+					$cmd_add_repo ppa:ppsspp/stable
+					$cmd_add_repo ppa:libretro/stable
+					;;
+					
+				15.04)
+					$cmd_add_repo ppa:gregory-hainaut/pcsx2.official.ppa
+					$cmd_add_repo ppa:glennric/dolphin-emu
+					$cmd_add_repo ppa:ppsspp/stable
+					$cmd_add_repo ppa:libretro/stable
+					;;
 
-	# Use retorigs PPA version, maintained by us (contains SDL2)
-	# This will need maintained with our build script in /supplemental
+				*)
+					;;
+			esac
+		;;
 
-	#########################
-	# Retroarch / Libretro
-	#########################
-	# Official Libretro team
-	$cmd_add_repo ppa:libretro/stable
-	# Alternative (limited pkgs)
-	# $cmd_add_repo ppa:hunter-kaller/ppa
+		LinuxMint)
 
+			case $OS_RELEASE in
+				"17")
+					$cmd_add_repo ppa:gregory-hainaut/pcsx2.official.ppa
+					$cmd_add_repo ppa:glennric/dolphin-emu
+					$cmd_add_repo ppa:ppsspp/stable
+					$cmd_add_repo ppa:libretro/stable
+					;;
+
+				*)
+					;;
+			esac
+		;;
+	
+		Deepin)
+
+			case $OS_RELEASE in
+				"2014")
+					$cmd_add_repo ppa:gregory-hainaut/pcsx2.official.ppa
+					$cmd_add_repo ppa:glennric/dolphin-emu
+					$cmd_add_repo ppa:ppsspp/stable
+					$cmd_add_repo ppa:libretro/stable	
+				;;
+			esac
+		;;
+		
+	esac
+
+}
+
+function_set_emu_pkg()
+{
+	
+	#####################################################################
+	# Process package names and types
+	# Add available repos in em_add_debian_repos()
+	#####################################################################
+	
+	case $OS_TYPE in
+		"Ubuntu")
+
+			case $OS_RELEASE in
+
+				14.04)
+					PKG_higan="higan"
+					PKG_retroarch="retroarch"
+					PKG_scummvm="libretro-scummvm"
+					PKG_4DO="libretro-4do"
+					PKG_virtualboy="libretro-beetle-vb"
+					PKG_wswan="libretro-beetle-wswan"
+					PKG_dolphin="dolphin-emu-master"
+					PKG_desmume="libretro-desmume"
+					PKG_gens="gens"
+					PKG_mame="mame"
+					PKG_mess="mess"
+					PKG_pcsx2="pcsx2"
+					PKG_ppsspp="ppsspp"
+					PKG_stella="stella"
+					;;
+					
+				15.04)
+					PKG_higan="higan"
+					PKG_retroarch="retroarch"
+					PKG_scummvm="libretro-scummvm"
+					PKG_4DO="libretro-4do"
+					PKG_virtualboy="libretro-beetle-vb"
+					PKG_wswan="libretro-beetle-wswan"
+					PKG_dolphin="dolphin-emu-master"
+					PKG_desmume="libretro-desmume"
+					PKG_gens="gens"
+					PKG_mame="mame"
+					PKG_mess="mess"
+					PKG_pcsx2="pcsx2"
+					PKG_ppsspp="ppsspp"
+					PKG_stella="stella"
+					;;
+
+				*)
+					;;
+			esac
+		;;
+
+		LinuxMint)
+
+			case $OS_RELEASE in
+				"17")
+					PKG_higan="higan"
+					PKG_retroarch="retroarch"
+					PKG_scummvm="libretro-scummvm"
+					PKG_4DO="libretro-4do"
+					PKG_virtualboy="libretro-beetle-vb"
+					PKG_wswan="libretro-beetle-wswan"
+					PKG_dolphin="dolphin-emu-master"
+					PKG_desmume="libretro-desmume"
+					PKG_gens="gens"
+					PKG_mame="mame"
+					PKG_mess="mess"
+					PKG_pcsx2="pcsx2"
+					PKG_ppsspp="ppsspp"
+					PKG_stella="stella"
+					;;
+
+				*)
+					;;
+			esac
+		;;
+	
+		Deepin)
+
+			case $OS_RELEASE in
+				"2014")
+					PKG_higan="higan"
+					PKG_retroarch="retroarch"
+					PKG_scummvm="libretro-scummvm"
+					PKG_4DO="libretro-4do"
+					PKG_virtualboy="libretro-beetle-vb"
+					PKG_wswan="libretro-beetle-wswan"
+					PKG_dolphin="dolphin-emu-master"
+					PKG_desmume="libretro-desmume"
+					PKG_gens="gens"
+					PKG_mame="mame"
+					PKG_mess="mess"
+					PKG_pcsx2="pcsx2"
+					PKG_ppsspp="ppsspp"
+					PKG_stella="stella"
+				;;
+			esac
+		;;
+		
+	esac
+
+	
 }
 
 function em_install_deb_emulators()
 {
 
 	#####################################################################
+	# Process package names and types based on OS/Release
+	#####################################################################
+
+	function_set_emu_pkg
+
+	#####################################################################
 	# Retroarch Unstable / Testing Cores
 	#####################################################################
 	
-	# install from libretro-unstable PPA
+	# install from libretro-stable PPA
 	# Packages were verified working enough for use.
 
-	
-	# add testing ppa only temporarily to add:
-	# 4do, ScummVM
-	
-	# Add repository for testing/unstable cores
-	$cmd_add_repo ppa:libretro/testing
-	$cmd_update_system
-
-	# Install 4DO (32 bit only available at the moment)
-	echo "Installing 3DO emulator 4DO (testing)"
-	$cmd_install_pkg libretro-4do
-
-	# Install scummvm emulator
+	# Install scummvm emulator from the RetroRig-PPA
 	# At the moment, only 32-bit is compiled sucessfully by 
-	# the libretro testing PPA team
+	# the libretro testing PPA team. PKG was copied to the 
+	# RetroRig-ES PPA
 	echo "Installing Scummvm emulator"
-	$cmd_install_pkg libretro-scummvm
+	$cmd_install_pkg $PKG_scummvm
 
-	# Remove ppa and upate	
-	$cmd_remove_repo ppa:libretro/testing
-	$cmd_update_system
+	#####################################################################
+	# 3DO (libretro 4DO core)
+	#####################################################################
+	
+	# install from libretro-stable PPA
+	$cmd_install_pkg $PKG_4DO
+	
+	#####################################################################
+	# Retroarch (used for libretro cores)
+	#####################################################################
+	
+	# Install Retroarch
+	echo "Installing emulator front-end Retroarch"
+	$cmd_install_pkg $PKG_retroarch
 	
 	#####################################################################
 	# Beetle (libretro beetle-vb core)
@@ -87,23 +219,17 @@ function em_install_deb_emulators()
 	echo "Installing Virtual Boy emulator Beetle-VB"
 
 	# Install beetle-vb  core
-	# Use libretro* for all packages
-	$cmd_install_pkg retroarch libretro-beetle-vb
+	$cmd_install_pkg $PKG_virtualboy
 
 	#####################################################################
 	# Beetle (libretro Bandai Wonderswan core)
 	#####################################################################
 	
-	# install from libretro-unstable PPA, downloaded as manual pkg
-        # from libreegeek.org until it makes it into the libretro/stable
-	# branch
-
-	# Install Wonderswan emulator
+	# install from libretro-stable PPA
 	echo "Installing Bandai Wonderswan emulator Beetle-Wswan"
-
-	# Install desmume core
-	# Use libretro* for all packages
-	$cmd_pkg_install libretro-beetle-wswan
+	
+	# Install Wonderswan emulator
+	$cmd_pkg_install $PKG_libretro-beetle-wswan
 
 	#####################################################################
 	# Dolphin (Nintendo Gamecube)
@@ -111,10 +237,11 @@ function em_install_deb_emulators()
 
 	# Installed via Glenric's PPA
 	echo "Installing Nintendo Gamecube emulator Dolphin"
-	# Note: Glenric's PPA uses dolphin-emu-master, not dolphin-emu for Trusty
-	# other wise install dolphin-emu
+	# Note: Glenric's PPA uses dolphin-emu-master, not dolphin-emu for
+	# Trusty/Vivid. Otherwise install dolphin-emu
 
-	$cmd_install_pkg dolphin-emu-master
+	# Install Dolphin emulator
+	$cmd_install_pkg $PKG_dolphin
 
 	#####################################################################
 	# DesMuMe (libretro core)
@@ -127,7 +254,7 @@ function em_install_deb_emulators()
 
 	# Install desmume core
 	# Use libretro* for all packages
-	$cmd_install_pkg retroarch libretro-desmume
+	$cmd_install_pkg $PKG_desmume
 
 	#####################################################################
 	# Gens (Genesis/Sega CD/Saturn)
@@ -135,24 +262,23 @@ function em_install_deb_emulators()
 
 	# Installed via RetroRig PPA
 	echo "Installing Gens Sega Genesis/CD/32X emulator"
-	$cmd_install_pkg gens
+	$cmd_install_pkg $PKG_gens
 
 	#####################################################################
 	# Mupen64plus (Sega Saturn)
 	#####################################################################
 	
-	# Installed via RetroRig PPA
+	# Installed via RetroRig PPA. Vivid pkg is still old.
 	echo "Installing mupen64plus emulator"
-	$cmd_install_pkg mupen64plus
+	$cmd_install_pkg $PKG_mupen64plus
 
 	#####################################################################
 	# MAME (multi-system)
 	#####################################################################
 
-	# Installed via core repos (kept up to date as of 20150107)
+	# Installed via core repos (kept up to date as of 20150512)
 	echo "Installing MAME emulator"
-	$cmd_install_pkg mame
-
+	$cmd_install_pkg $PKG_mame
 
 	#####################################################################
 	# Mednafen (multi-system)
@@ -160,7 +286,7 @@ function em_install_deb_emulators()
 
 	# Installed via core repos
 	echo "Installing Mednafen emulator"
-	$cmd_install_pkg mednafen
+	$cmd_install_pkg $PKG_mednafen
 
 	#####################################################################
 	# MESS (multi-system)
@@ -168,17 +294,17 @@ function em_install_deb_emulators()
 
 	# Installed via core repos (kept up to date as of 20150107)
 	echo "Installing MESS emulator"
-	$cmd_install_pkg mess
+	$cmd_install_pkg $PKG_mess
 
 	#####################################################################
 	# PCSX2 (Playstation 2)
 	#####################################################################
 
-        #install from gregory-hainaut PPA
+        # Install from gregory-hainaut PPA
 	echo "Installing Playstation 2 emulator PCSX2"
-	$cmd_install_pkg pcsx2
+	$cmd_install_pkg $PKG_pcsx2
 
-	#prerequisites
+	# Prerequisites
 	$cmd_install_pkg libportaudio2:i386 libjack-jackd2-0:i386
   
 	# Link BIOS path from home/RetroRig (source) to .retrorig/
@@ -192,15 +318,14 @@ function em_install_deb_emulators()
 	mv "$HOME/.config/pcsx2" "$HOME/.config/pcsx2.backup_retrorig.$date"
 	ln -vs "$config_home/.config/pcsx2/" "$HOME/.config"
 
-
 	#####################################################################
 	# PPSSPP (PSP)
 	#####################################################################
 
 	echo "Installing Playstation Portable emulator ppsspp"
 
-        #install from RetroRig PPA
-	$cmd_install_pkg ppsspp
+        # Install from ppa:ppsspp/stable. 11 weeks old as of 20150512
+	$cmd_install_pkg $PKG_ppsspp
 
 	#####################################################################
 	# Stella (Atari 2600)
@@ -208,7 +333,9 @@ function em_install_deb_emulators()
 
         # Install from RetroRig PPA
 	# Libretro core does not support save states, use our package.
-	$cmd_install_pkg stella
+	# Needs built for Vivid. Binary copied, but needs tesed. If that fails,
+	# source package will need rebuilt to Vivid release in RetroRig PPA.
+	$cmd_install_pkg $PKG_stella
 
 	#####################################################################
 	# Yabause (libretro Sega Saturn core) 
@@ -221,38 +348,16 @@ function em_install_deb_emulators()
 	# Install desmume core
 	# Use libretro* for all packages
 	#$cmd_install_pkg retroarch libretro-yabause
+	
+	#####################################################################
+	# Higan (Accurate Nintendo multi-system emulator)
+	#####################################################################
+	
+	# Install Higan
+	echo "Installing Nintendo multi-system emulator Higan"
 
+	# Install Higan
+	# Package source: Vivid
+
+	$cmd_install_pkg $PKG_higan
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
