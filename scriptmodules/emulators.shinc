@@ -10,11 +10,12 @@
 function em_add_debian_repos()
 {
 	# Note: system update for repos occurs in rrs_software
-	# The ppa:mdeguzis/retrorig PPA is added in rrs_add_standard_repos
+	
+	# NOTE: The ppa:mdeguzis/retrorig PPA is added in rrs_add_standard_repos
 	# We want to maintain as little as possible to decrease overhead
 	
 
-case $OS_TYPE in
+	case $OS_TYPE in
 		"Ubuntu")
 
 			case $OS_RELEASE in
