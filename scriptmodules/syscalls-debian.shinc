@@ -36,10 +36,33 @@ cmd_manual_pkg_install="dpkg -i"
 # Init
 ######################################################
 # update rescan init
-update_init_rescan="update-rc.d rescan defaults"
-update_init_xboxdrv="update-rc.d xboxdrv defaults"
-xboxdrv_init="/etc/init.d/xboxdrv"
-xboxdrv_defaults="/etc/default/xboxdrv"
+# set based on init system
+	
+if [[ "$init_system" == "systemd" ]]; then
+
+	update_init_rescan="sudo systemctl enable rescan"
+  update_init_xboxdrv="sudo systemctl enable xboxdrv"
+  xboxdrv_init="xboxdrv"
+  xboxdrv_defaults="/etc/default/xboxdrv"
+	
+elif [[ "$init_system" == "upstart" ]]; then
+
+  update_init_rescan="update-rc.d rescan defaults"
+  update_init_xboxdrv="update-rc.d xboxdrv defaults"
+  xboxdrv_init="/etc/init.d/xboxdrv"
+  xboxdrv_defaults="/etc/default/xboxdrv"
+
+else
+
+  update_init_rescan="update-rc.d rescan defaults"
+  update_init_xboxdrv="update-rc.d xboxdrv defaults"
+  xboxdrv_init="/etc/init.d/xboxdrv"
+  xboxdrv_defaults="/etc/default/xboxdrv"
+  
+fi
+
+# blacklist xpad
+cp -v "$scriptdir/init-scripts/ps3_usb_controller/blacklist.conf" "/etc/modprobe.d/"
 
 ######################################################
 # Kernel
@@ -55,37 +78,102 @@ linux_image="http://kernel.ubuntu.com/~kernel-ppa/mainline/v3.14-trusty/linux-im
 # Services
 ######################################################
 
-# sixad
-cmd_sixad_start="service sixad start"
-cmd_sixad_restart="service sixad restart"
-cmd_sixad_stop="service sixad stop"
-cmd_remove_sixad="update-rc.d -f sixad remove"
+# set based on init system
 
-#rescan
-cmd_rescan_start="service rescan start"
-cmd_rescan_restart="service rescan restart"
-cmd_rescan_stop="service rescan stop"
-cmd_remove_rescan="update-rc.d -f rescan remove"
+if [[ "$init_system" == "systemd" ]]; then
+  # sixad
+  cmd_sixad_start="systemctl start sixad"
+  cmd_sixad_restart="systemctl restart sixad"
+  cmd_sixad_stop="systemctl restart sixad"
+  cmd_remove_sixad="systemctl disable sixad"
+  
+  #rescan
+  cmd_rescan_start="systemctl start rescan"
+  cmd_rescan_restart="systemctl restart rescan"
+  cmd_rescan_stop="systemctl restart rescan"
+  cmd_remove_rescan="systemctl disable rescan"
+  
+  # xboxdrv
+  cmd_xboxdrv_start="systemctl start xboxdrv"
+  cmd_xboxdrv_restart="systemctl restart xboxdrv"
+  cmd_xboxdrv_stop="systemctl restart xboxdrv"
+  cmd_remove_xboxdrv="systemctl disable xboxdrv"
+  
+  # samba
+  cmd_samba_start="systemctl start samba"
+  cmd_samba_restart="systemctl restart samba"
+  cmd_samba_stop="systemctl restart samba"
+  cmd_remove_samba="systemctl disable samba"
+  
+  # ssh
+  cmd_ssh_start="systemctl start ssh"
+  cmd_ssh_restart="systemctl restart ssh"
+  cmd_ssh_stop="systemctl restart ssh"
+  cmd_remove_ssh="systemctl disable ssh"
+  
+elif [[ "$init_system" == "upstart" ]]; then
+  # sixad
+  cmd_sixad_start="service sixad start"
+  cmd_sixad_restart="service sixad restart"
+  cmd_sixad_stop="service sixad stop"
+  cmd_remove_sixad="update-rc.d -f sixad remove"
+  
+  #rescan
+  cmd_rescan_start="service rescan start"
+  cmd_rescan_restart="service rescan restart"
+  cmd_rescan_stop="service rescan stop"
+  cmd_remove_rescan="update-rc.d -f rescan remove"
+  
+  # xboxdrv
+  cmd_xboxdrv_start="service xboxdrv start"
+  cmd_xboxdrv_restart="service xboxdrv restart"
+  cmd_xboxdrv_stop="service xboxdrv stop"
+  cmd_remove_xboxdrv="update-rc.d -f xboxdrv remove"
+  
+  # samba
+  cmd_samba_start="service samba start"
+  cmd_samba_restart="service samba restart"
+  cmd_samba_stop="service samba stop"
+  
+  # ssh
+  cmd_ssh_start="service ssh start"
+  cmd_ssh_restart="service ssh restart"
+  cmd_ssh_stop="service ssh stop"
+else
 
-# xboxdrv
-cmd_xboxdrv_start="service xboxdrv start"
-cmd_xboxdrv_restart="service xboxdrv restart"
-cmd_xboxdrv_stop="service xboxdrv stop"
-cmd_remove_xboxdrv="update-rc.d -f xboxdrv remove"
-
-# samba
-cmd_samba_start="service samba start"
-cmd_samba_restart="service samba restart"
-cmd_samba_stop="service samba stop"
-
-# ssh
-cmd_ssh_start="service ssh start"
-cmd_ssh_restart="service ssh restart"
-cmd_ssh_stop="service ssh stop"
+  # sixad
+  cmd_sixad_start="service sixad start"
+  cmd_sixad_restart="service sixad restart"
+  cmd_sixad_stop="service sixad stop"
+  cmd_remove_sixad="update-rc.d -f sixad remove"
+  
+  #rescan
+  cmd_rescan_start="service rescan start"
+  cmd_rescan_restart="service rescan restart"
+  cmd_rescan_stop="service rescan stop"
+  cmd_remove_rescan="update-rc.d -f rescan remove"
+  
+  # xboxdrv
+  cmd_xboxdrv_start="service xboxdrv start"
+  cmd_xboxdrv_restart="service xboxdrv restart"
+  cmd_xboxdrv_stop="service xboxdrv stop"
+  cmd_remove_xboxdrv="update-rc.d -f xboxdrv remove"
+  
+  # samba
+  cmd_samba_start="service samba start"
+  cmd_samba_restart="service samba restart"
+  cmd_samba_stop="service samba stop"
+  
+  # ssh
+  cmd_ssh_start="service ssh start"
+  cmd_ssh_restart="service ssh restart"
+  cmd_ssh_stop="service ssh stop"
+fi
 
 ######################################################
 # Various
 ######################################################
+
 cmd_add_32bit_arch="dpkg --add-architecture i386"
 cmd_remove_32bit_arch="dpkg --remove-architecture i386"
 
@@ -95,6 +183,3 @@ cmd_remove_32bit_arch="dpkg --remove-architecture i386"
 
 # Populate any applications, whose path differs from the 
 # typical norm on the base targe Ubuntu.
-
-
-
