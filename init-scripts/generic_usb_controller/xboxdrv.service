@@ -1,0 +1,13 @@
+[Unit]
+Description=Xboxdrv service file. Based off of http://robert.hurst-ri.us/2014/03/02/xboxdrv-a-fedora-systemctl-service/
+
+[Service]
+
+ExecStart=/bin/xboxdrv --daemon --detach --detach-kernel-driver --pid-file /var/run/xboxdrv.pid --dbus disabled --silent --deadzone 4000 --deadzone-trigger 10% --dpad-as-button --led 2 --next-controller --dpad-as-button --led 3
+
+# ==INFO==
+# sudo systemctl daemon-reload
+# sudo systemctl restart xboxdrv
+
+[Install]
+WantedBy=multi-user.target
