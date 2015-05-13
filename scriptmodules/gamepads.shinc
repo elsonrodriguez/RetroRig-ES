@@ -17,8 +17,38 @@ function gp_common()
 	cp -v "$scriptdir/common/parserConfig.xml" "$rootdir/Artwork/MAME/"
 	cp -v "$scriptdir/common/MAME.txt" "$rootdir/Artwork/MAME/"
 	cp -v "$scriptdir/common/MAME synopsis RCB 201202.zip" "$rootdir/Artwork/MAME/"
+	
+	##############################################################
+	# Set system objects
+	##############################################################
+
+	# set based on init system
+	
+	if [[ "$init_system" == "systemd" ]]; then
+	
+		# Legacy option
+		# copy legacy SysV / Upstart Script to be called by systemd service file
+		cp -v "$scriptdir/init-scripts/ps3_usb_controller/xboxdrv" "/usr/lib/systemd/scripts/xboxdrv/"
+		cp -v "$scriptdir/init-scripts/ps3_usb_controller/default/xboxdrv" "/etc/default/"
+		
+	elif [[ "$init_system" == "upstart" ]]; then
+	
+		# inject init script and default config for xboxdrv
+		cp -v "$scriptdir/init-scripts/ps3_usb_controller/xboxdrv" "/etc/init.d/"
+		cp -v "$scriptdir/init-scripts/ps3_usb_controller/default/xboxdrv" "/etc/default/"
+	
+	else
+	
+		# inject init script and default config for xboxdrv
+		cp -v "$scriptdir/init-scripts/ps3_usb_controller/xboxdrv" "/etc/init.d/"
+		cp -v "$scriptdir/init-scripts/ps3_usb_controller/default/xboxdrv" "/etc/default/"
+	fi
+	
+	# blacklist xpad
+	cp -v "$scriptdir/init-scripts/ps3_usb_controller/blacklist.conf" "/etc/modprobe.d/"
 
 }
+
 
 function gp_ps3_blu()
 {
@@ -645,17 +675,6 @@ function gp_ps3_usb()
 	gp_steam_control
 
 	##############################################################
-	# Set system objects
-	##############################################################
-
-	# inject init script and default config for xboxdrv
-	cp -v "$scriptdir/init-scripts/ps3_usb_controller/xboxdrv" "/etc/init.d/"
-	cp -v "$scriptdir/init-scripts/ps3_usb_controller/default/xboxdrv" "/etc/default/"
-	
-	# blacklist xpad
-	cp -v "$scriptdir/init-scripts/ps3_usb_controller/blacklist.conf" "/etc/modprobe.d/"
-
-	##############################################################
 	# Set number of controllers for /etc/default/xboxdrv
 	##############################################################
 
@@ -703,15 +722,6 @@ RetorRig loads to use the gamepad" 14 60
 
 		esac
 	done
-
-	###########################################################
-	# Add emulator specifc control remaps here for qjoypad
-	###########################################################
-	# !!! Removed in favor of anitmicro since 0.9.5b !!!
-	###########################################################
-
-	# blacklist xpad
-	cp -v "$scriptdir/init-scripts/ps3_blu_controller/blacklist.conf" "/etc/modprobe.d/"
 
 	###############################################################################################
 	# Add emulator specifc control remaps here for AniMicro
@@ -923,17 +933,6 @@ function gp_x360_wireless()
 	# Alter Steam config.vdf with proper controls if controller exists
 	STEAM_GP_TYPE="x360wireless"
 	gp_steam_control
-
-	#######################################################
-	# configure xboxdrv for 360 gamepad (wireless)
-	#######################################################
-	
-	#blacklist xpad
-	cp -v "$scriptdir/init-scripts/x360_wireless_controller/blacklist.conf" "/etc/modprobe.d/"
-
-	#inject init script and default config
-	cp -v "$scriptdir/init-scripts/x360_wireless_controller/xboxdrv" "/etc/init.d/"
-	cp -v "$scriptdir/init-scripts/x360_wireless_controller/default/xboxdrv" "/etc/default/"
 
 	##############################################################
 	# Set number of controllers for /etc/default/xboxdrv
@@ -1206,17 +1205,6 @@ function gp_x360_usb()
 	# Alter Steam config.vdf with proper controls if controller exists
 	STEAM_GP_TYPE="x360usb"
 	gp_steam_control
-
-	############################################
-	# configure xboxdrv for 360 gamepad (USB)
-	############################################
-	
-	#blacklist xpad
-	cp -v "$scriptdir/init-scripts/x360_usb_controller/blacklist.conf" "/etc/modprobe.d/"
-
-	#inject init script and default config
-	cp -v "$scriptdir/init-scripts/x360_usb_controller/xboxdrv" "/etc/init.d/"
-	cp -v "$scriptdir/init-scripts/x360_usb_controller/default/xboxdrv" "/etc/default/"
 
 	##############################################################
 	# Set number of controllers for /etc/default/xboxdrv
@@ -1495,17 +1483,6 @@ function gp_generic_usb()
 	# Alter Steam config.vdf with proper controls if controller exists
 	STEAM_GP_TYPE="x360usb"
 	gp_steam_control
-
-	############################################
-	# configure xboxdrv for 360 gamepad (USB)
-	############################################
-	
-	#blacklist xpad
-	cp -v "$scriptdir/init-scripts/generic_usb_controller/blacklist.conf" "/etc/modprobe.d/"
-
-	#inject init script and default config
-	cp -v "$scriptdir/init-scripts/generic_usb_controller/xboxdrv" "/etc/init.d/"
-	cp -v "$scriptdir/init-scripts/generic_usb_controller/default/xboxdrv" "/etc/default/"
 
 	##############################################################
 	# Set number of controllers for /etc/default/xboxdrv
