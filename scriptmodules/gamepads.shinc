@@ -28,27 +28,27 @@ function gp_common()
 	
 		# Legacy option
 		# copy legacy SysV / Upstart Script to be called by systemd service file
-		cp -v "$scriptdir/init-scripts/common/systemd/xboxdrv.scripts.legacy" "/usr/lib/systemd/scripts/xboxdrv/"
-		cp -v "$scriptdir/init-scripts/common/cfgs/default/xboxdrv" "/etc/default/"
+		cp -v "$scriptdir/init-scripts/systemd/xboxdrv.scripts.legacy" "/usr/lib/systemd/scripts/xboxdrv/"
+		cp -v "$scriptdir/init-scripts/cfgs/default/xboxdrv" "/etc/default/"
 		
 		# "Native" option
-		cp -v "$scriptdir/init-scripts/common/systemd/xboxdrv" "/usr/lib/systemd/scripts/xboxdrv/"
+		cp -v "$scriptdir/init-scripts/systemd/xboxdrv" "/usr/lib/systemd/scripts/xboxdrv/"
 		
 	elif [[ "$init_system" == "upstart" ]]; then
 	
 		# inject init script and default config for xboxdrv
-		cp -v "$scriptdir/init-scripts/common/sysv/xboxdrv" "/etc/init.d/"
-		cp -v "$scriptdir/init-scripts/common/cfg/xboxdrv" "/etc/default/"
+		cp -v "$scriptdir/init-scripts/sysv/xboxdrv" "/etc/init.d/"
+		cp -v "$scriptdir/init-scripts/cfgs/xboxdrv" "/etc/default/"
 	
 	else
 	
 		# inject init script and default config for xboxdrv
-		cp -v "$scriptdir/init-scripts/common//upstart/xboxdrv" "/etc/init.d/"
-		cp -v "$scriptdir/init-scripts/common/default/xboxdrv" "/etc/default/"
+		cp -v "$scriptdir/init-scripts/upstart/xboxdrv" "/etc/init.d/"
+		cp -v "$scriptdir/init-scripts/cfgs/default/xboxdrv" "/etc/default/"
 	fi
 	
 	# blacklist xpad
-	cp -v "$scriptdir/init-scripts/common/blacklist.conf" "/etc/modprobe.d/"
+	cp -v "$scriptdir/init-scripts/cfgs/blacklist.conf" "/etc/modprobe.d/"
 
 }
 
